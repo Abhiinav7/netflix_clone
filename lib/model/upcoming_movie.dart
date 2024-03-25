@@ -1,21 +1,21 @@
 // To parse this JSON data, do
 //
-//     final upcomingMovieModel = upcomingMovieModelFromJson(jsonString);
+//     final movieModel = movieModelFromJson(jsonString);
 
 import 'dart:convert';
 
-UpcomingMovieModel upcomingMovieModelFromJson(String str) => UpcomingMovieModel.fromJson(json.decode(str));
+MovieModel movieModelFromJson(String str) => MovieModel.fromJson(json.decode(str));
 
-String upcomingMovieModelToJson(UpcomingMovieModel data) => json.encode(data.toJson());
+String movieModelToJson(MovieModel data) => json.encode(data.toJson());
 
-class UpcomingMovieModel {
+class MovieModel {
   Dates dates;
   int page;
   List<Result> results;
   int totalPages;
   int totalResults;
 
-  UpcomingMovieModel({
+  MovieModel({
     required this.dates,
     required this.page,
     required this.results,
@@ -23,7 +23,7 @@ class UpcomingMovieModel {
     required this.totalResults,
   });
 
-  factory UpcomingMovieModel.fromJson(Map<String, dynamic> json) => UpcomingMovieModel(
+  factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
     dates: Dates.fromJson(json["dates"]),
     page: json["page"],
     results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),

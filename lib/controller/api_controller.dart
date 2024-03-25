@@ -5,7 +5,7 @@ import '../services/api_services.dart';
 
 class ApiController extends ChangeNotifier{
   // final apiServices=ApiServices();
-  UpcomingMovieModel? upcomingMovies;
+  MovieModel? upcomingMovies;
   getUpcomingMovies()async{
     upcomingMovies=await ApiServices.getUpcomingMovies();
     notifyListeners();

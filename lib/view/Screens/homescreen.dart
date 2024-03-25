@@ -8,11 +8,24 @@ import '../../common/utils.dart';
 import '../../controller/api_controller.dart';
 import '../../model/upcoming_movie.dart';
 import '../../widgets/movie_card.dart';
-import '../../widgets/shimmerEffect.dart';
+import '../../widgets/moviecard.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  late Future<MovieModel> nowPlaying;
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    nowPlaying=ApiServices.nowPlayingMovies();
+  }
   @override
   Widget build(BuildContext context) {
     return Consumer<ApiController>(
@@ -50,7 +63,9 @@ class HomeScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                MovieCard(future: controller.getUpcomingMovies(), heading: 'Upcoming Movies',)
+                MovieCardView(future: nowPlaying, headlineText: 'Now Playing',),
+                MovieCard(future: controller.getUpcomingMovies(), heading: 'Upcoming Movies',),
+
               ],
             ),
           )),

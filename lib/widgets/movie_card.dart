@@ -44,21 +44,22 @@ class MovieCard extends StatelessWidget {
                             .upcomingMovies!.results.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 4),
                               child:
-                              Image.network(
-                                fit: BoxFit.fitHeight,
-                                  "$imageUrl${controller.upcomingMovies?.results[index].posterPath}"
-                              ),
-
-                              // CachedNetworkImage(
-                              //   errorWidget: (context, url, error) => CircularProgressIndicator(),
-                              //   placeholder: (context, url) => MyShimmer(
-                              //       color: Colors.white,
-                              //       width: 120,
-                              //       height: 200),
+                              // Image.network(
                               //   fit: BoxFit.fitHeight,
-                              //   imageUrl: '$imageUrl${controller.upcomingMovies?.results[index].posterPath}',)
+                              //     "$imageUrl${controller.upcomingMovies?.results[index].posterPath}"
+                              // ),
+
+                              CachedNetworkImage(
+                                errorWidget: (context, url, error) => const CircularProgressIndicator(),
+                                placeholder: (context, url) => const MyShimmer(
+                                    color: Colors.white,
+                                    width: 120,
+                                    height: 200),
+                                fit: BoxFit.fill,
+                                width: 120,
+                                imageUrl: '$imageUrl${controller.upcomingMovies?.results[index].posterPath}',)
                           );
                         },
                       ),
@@ -67,22 +68,22 @@ class MovieCard extends StatelessWidget {
                 ),
               )
                   :
-              // SizedBox();
-              ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: MyShimmer(
-                            color: Colors.white,
-                            width: 120,
-                            height: 200,
-
-                          ),
-                        );
-                      },
-                    );
+              SizedBox();
+              // ListView.builder(
+              //         scrollDirection: Axis.horizontal,
+              //         itemCount: 5,
+              //         itemBuilder: (context, index) {
+              //           return Padding(
+              //             padding: const EdgeInsets.all(5.0),
+              //             child: MyShimmer(
+              //               color: Colors.white,
+              //               width: 120,
+              //               height: 200,
+              //
+              //             ),
+              //           );
+              //         },
+              //       );
             } else {
               return const SizedBox.shrink();
             }
