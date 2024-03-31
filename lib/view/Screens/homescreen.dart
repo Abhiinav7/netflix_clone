@@ -1,33 +1,21 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:netflix/services/api_services.dart';
+import 'package:netflix/widgets/carousal_slider.dart';
 import 'package:provider/provider.dart';
 import '../../common/utils.dart';
 import '../../controller/api_controller.dart';
-import '../../model/upcoming_movie.dart';
-import '../../widgets/movie_card.dart';
+import '../../model/movie_model.dart';
+import '../../model/tv_series_model.dart';
+
 import '../../widgets/moviecard.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  late Future<MovieModel> nowPlaying;
-
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    nowPlaying=ApiServices.nowPlayingMovies();
-  }
-  @override
   Widget build(BuildContext context) {
+    ApiServices apiServices = ApiServices();
     return Consumer<ApiController>(
       builder: (context, controller, child) => Scaffold(
           appBar: AppBar(
@@ -63,8 +51,32 @@ class _HomeScreenState extends State<HomeScreen> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                MovieCardView(future: nowPlaying, headlineText: 'Now Playing',),
-                MovieCard(future: controller.getUpcomingMovies(), heading: 'Upcoming Movies',),
+                SizedBox(
+                  height: 10,
+                ),
+                FutureBuilder(
+                  future: apiServices.topRatedSeries(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return CustomCarousal(seriesModel: snapshot.data!);
+                    } else {
+                      return SizedBox();
+                    }
+                  },
+                ),
+
+                MovieCardView(
+                  future: apiServices.nowPlayingMovies(),
+                  headlineText: 'Now Playing',
+                ),
+                SizedBox(
+                  height: 7,
+                ),
+                MovieCardView(
+                  future: apiServices.getUpcomingMovies(),
+                  headlineText: 'Upcoming Movies',
+                ),
+
 
               ],
             ),
@@ -72,3 +84,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+

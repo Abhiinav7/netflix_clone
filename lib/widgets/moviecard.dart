@@ -1,13 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:netflix/model/upcoming_movie.dart';
+import 'package:netflix/model/movie_model.dart';
 import 'package:netflix/widgets/shimmerEffect.dart';
-
 import '../common/utils.dart';
 class MovieCardView extends StatelessWidget {
   MovieCardView({super.key,required this.future,  this.height=200,required this.headlineText,});
-  final Future<MovieModel> future;
-  final String headlineText;
+   Future<MovieModel> future;
+   String headlineText;
   double? height;
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class MovieCardView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 10,
                     ),
                     Expanded(
                       child: ListView.builder(
@@ -56,7 +55,7 @@ class MovieCardView extends StatelessWidget {
                               //       height: 200),
                               //   fit: BoxFit.fill,
                               //   width: 120,
-                              //   imageUrl: '$imageUrl${data[index]!.posterPath}',)
+                              //   imageUrl: '$imageUrl${data[index].posterPath}',)
                           );
                         },
                       ),
