@@ -1,3 +1,4 @@
+ import 'package:netflix/model/movie_detail_model.dart';
 import 'package:netflix/model/recpomended_movie_model.dart';
 import 'package:netflix/model/searchMovieModel.dart';
 
@@ -65,5 +66,15 @@ class ApiServices {
        return recomendedMovieModelFromJson(response.body);
      }
      throw Exception("failed to load popular movies ");
+   }
+   Future<MovieDetailModel> getMovieDetails(int id)async {
+     endpoint="movie/$id";
+     final url="$baseurl$endpoint$key";
+     final response=await http.get(Uri.parse(url));
+     if(response.statusCode==200){
+       print("successfully loaded movie details");
+       return movieDetailModelFromJson(response.body);
+     }
+     throw Exception("failed to movie details  ");
    }
 }
