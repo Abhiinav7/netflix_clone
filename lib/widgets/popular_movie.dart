@@ -51,7 +51,7 @@ class Popularmovie extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MovieDetailScreen(),
+                                  builder: (context) => MovieDetailScreen(movieid: data[index].id,),
                                 ));
                           },
                           child: Container(

@@ -11,7 +11,7 @@ String movieDetailModelToJson(MovieDetailModel data) => json.encode(data.toJson(
 class MovieDetailModel {
   bool adult;
   String backdropPath;
-  BelongsToCollection belongsToCollection;
+  dynamic belongsToCollection;
   int budget;
   List<Genre> genres;
   String homepage;
@@ -66,7 +66,7 @@ class MovieDetailModel {
   factory MovieDetailModel.fromJson(Map<String, dynamic> json) => MovieDetailModel(
     adult: json["adult"],
     backdropPath: json["backdrop_path"],
-    belongsToCollection: BelongsToCollection.fromJson(json["belongs_to_collection"]),
+    belongsToCollection: json["belongs_to_collection"],
     budget: json["budget"],
     genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
     homepage: json["homepage"],
@@ -94,7 +94,7 @@ class MovieDetailModel {
   Map<String, dynamic> toJson() => {
     "adult": adult,
     "backdrop_path": backdropPath,
-    "belongs_to_collection": belongsToCollection.toJson(),
+    "belongs_to_collection": belongsToCollection,
     "budget": budget,
     "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
     "homepage": homepage,
@@ -117,34 +117,6 @@ class MovieDetailModel {
     "video": video,
     "vote_average": voteAverage,
     "vote_count": voteCount,
-  };
-}
-
-class BelongsToCollection {
-  int id;
-  String name;
-  String posterPath;
-  String backdropPath;
-
-  BelongsToCollection({
-    required this.id,
-    required this.name,
-    required this.posterPath,
-    required this.backdropPath,
-  });
-
-  factory BelongsToCollection.fromJson(Map<String, dynamic> json) => BelongsToCollection(
-    id: json["id"],
-    name: json["name"],
-    posterPath: json["poster_path"],
-    backdropPath: json["backdrop_path"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "poster_path": posterPath,
-    "backdrop_path": backdropPath,
   };
 }
 

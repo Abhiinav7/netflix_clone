@@ -70,8 +70,10 @@ class ApiServices {
    Future<MovieDetailModel> getMovieDetails(int id)async {
      endpoint="movie/$id";
      final url="$baseurl$endpoint$key";
+     print(url);
      final response=await http.get(Uri.parse(url));
      if(response.statusCode==200){
+       print(url);
        print("successfully loaded movie details");
        return movieDetailModelFromJson(response.body);
      }
