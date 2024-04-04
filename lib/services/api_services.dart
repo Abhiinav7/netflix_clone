@@ -1,4 +1,5 @@
  import 'package:netflix/model/movie_detail_model.dart';
+import 'package:netflix/model/movie_recomendationModel.dart';
 import 'package:netflix/model/recpomended_movie_model.dart';
 import 'package:netflix/model/searchMovieModel.dart';
 
@@ -78,5 +79,17 @@ class ApiServices {
        return movieDetailModelFromJson(response.body);
      }
      throw Exception("failed to movie details  ");
+   }
+   Future<MovieRecommendationModel> getMovieRecommendations(int id)async {
+     endpoint="movie/$id/recommendations";
+     final url="$baseurl$endpoint$key";
+     print("more like this url:$url");
+     final response=await http.get(Uri.parse(url));
+     if(response.statusCode==200){
+       print(url);
+       print("successfully loaded more like this ");
+       return movieRecommendationModelFromJson(response.body);
+     }
+     throw Exception("failed to more like this movies");
    }
 }

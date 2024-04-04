@@ -35,7 +35,7 @@ class Popularmovie extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 18,
                   ),
                   ListView.builder(
                     shrinkWrap: true,
@@ -55,7 +55,7 @@ class Popularmovie extends StatelessWidget {
                                 ));
                           },
                           child: Container(
-                            height: 120,
+                            height: 110,
                             child: Row(
                               children: [
                                 Image.network(
@@ -71,6 +71,7 @@ class Popularmovie extends StatelessWidget {
                                       data[index].title,
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(fontSize: 19),
                                     ))
                               ],
                             ),

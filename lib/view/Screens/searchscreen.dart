@@ -37,25 +37,28 @@ class _SearchScreenState extends State<SearchScreen> {
               SizedBox(
                 height: 15,
               ),
-              CupertinoSearchTextField(
-                prefixIcon: Icon(
-                  Icons.search_sharp,
-                  color: Colors.grey,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: CupertinoSearchTextField(
+                  prefixIcon: Icon(
+                    Icons.search_sharp,
+                    color: Colors.grey,
+                  ),
+                  style: TextStyle(color: Colors.white),
+                  controller: searchController,
+                  padding: EdgeInsets.all(15),
+                  suffixIcon: Icon(
+                    Icons.cancel,
+                    color: Colors.grey,
+                  ),
+                  backgroundColor: Colors.grey.withOpacity(0.3),
+                  onChanged: (value) {
+                    if (value.isEmpty) {
+                    } else {
+                      controller.search(searchController.text);
+                    }
+                  },
                 ),
-                style: TextStyle(color: Colors.white),
-                controller: searchController,
-                padding: EdgeInsets.all(15),
-                suffixIcon: Icon(
-                  Icons.cancel,
-                  color: Colors.grey,
-                ),
-                backgroundColor: Colors.grey.withOpacity(0.3),
-                onChanged: (value) {
-                  if (value.isEmpty) {
-                  } else {
-                    controller.search(searchController.text);
-                  }
-                },
               ),
               searchController.text.isEmpty?
               Popularmovie(future: apiServices.getpopularMovies(),headlineText: "Top Searches",)

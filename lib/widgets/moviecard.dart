@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix/model/movie_model.dart';
+import 'package:netflix/view/Screens/movie_detail_screen.dart';
 import 'package:netflix/widgets/shimmerEffect.dart';
 import '../common/utils.dart';
 class MovieCardView extends StatelessWidget {
@@ -42,9 +43,12 @@ class MovieCardView extends StatelessWidget {
                           return Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 4),
                               child:
-                              Image.network(
-                                fit: BoxFit.fitHeight,
-                                  "$imageUrl${data[index].posterPath}"
+                              InkWell(
+                                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(movieid: data[index].id),));},
+                                child: Image.network(
+                                  fit: BoxFit.fitHeight,
+                                    "$imageUrl${data[index].posterPath}"
+                                ),
                               ),
 
                               // CachedNetworkImage(
