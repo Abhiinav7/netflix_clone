@@ -116,7 +116,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     height: 30,
                   ),
                   SizedBox(
-                    height: 190,
+                    height: 180,
                     child: FutureBuilder(
                       future: movieRecommendations,
                       builder: (context, snapshot) {
@@ -138,10 +138,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                         itemBuilder: (context, index) {
                                           return Padding(
                                             padding: const EdgeInsets.symmetric(
-                                                horizontal: 8.0),
+                                                horizontal: 5.0),
                                             child: InkWell(
                                               onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(movieid: moreLikeThis.results[index].id),));},
                                                 child: CachedNetworkImage(
+                                                  fit:BoxFit.fitWidth,
                                               imageUrl:
                                                   "$imageUrl${moreLikeThis.results[index].posterPath},",
                                             )),

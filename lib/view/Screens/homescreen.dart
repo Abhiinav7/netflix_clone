@@ -9,6 +9,7 @@ import '../../model/movie_model.dart';
 import '../../model/tv_series_model.dart';
 
 import '../../widgets/moviecard.dart';
+import '../../widgets/trendingMovieCard.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -64,7 +65,6 @@ class HomeScreen extends StatelessWidget {
                     }
                   },
                 ),
-
                 MovieCardView(
                   future: apiServices.nowPlayingMovies(),
                   headlineText: 'Now Playing',
@@ -76,12 +76,11 @@ class HomeScreen extends StatelessWidget {
                   future: apiServices.getUpcomingMovies(),
                   headlineText: 'Upcoming Movies',
                 ),
-
-
+                MovieCard(
+                    future: apiServices.trendingIn(), headlineText: "Trending")
               ],
             ),
           )),
     );
   }
 }
-

@@ -38,12 +38,12 @@ class SearchMovies extends StatelessWidget {
                       height: 180,
                 filterQuality: FilterQuality.high,
                     ),
-              SizedBox(height: 5,),
+              SizedBox(height: 8,),
               controller.searchMovieModel!.results[index].title == null
                   ? Text("")
                   : Text(
                       controller.searchMovieModel!.results[index].title,
-                      style: TextStyle(fontSize: 13),
+                      style: TextStyle(fontSize: 15),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     )

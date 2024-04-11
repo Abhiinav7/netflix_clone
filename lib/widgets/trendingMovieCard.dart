@@ -1,19 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix/model/movie_model.dart';
+import 'package:netflix/model/trendingModel.dart';
 import 'package:netflix/view/Screens/movie_detail_screen.dart';
 import 'package:netflix/widgets/shimmerEffect.dart';
 import '../common/utils.dart';
-class MovieCardView extends StatelessWidget {
-  MovieCardView({super.key,required this.future,  this.height=215,required this.headlineText,});
-   Future<MovieModel> future;
-   String headlineText;
+class MovieCard extends StatelessWidget {
+  MovieCard({super.key,required this.future,  this.height=215,required this.headlineText,});
+  Future<TrendingModel> future;
+  String headlineText;
   double? height;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
-      child: FutureBuilder<MovieModel>(
+      child: FutureBuilder<TrendingModel>(
           future: future,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -41,25 +42,25 @@ class MovieCardView extends StatelessWidget {
                         itemCount: data!.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 4),
-                              child:
-                              InkWell(
-                                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(movieid: data[index].id),));},
-                                child: Image.network(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                            child:
+                            InkWell(
+                              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(movieid: data[index].id),));},
+                              child: Image.network(
                                   fit: BoxFit.fitHeight,
-                                    "$imageUrl${data[index].posterPath}"
-                                ),
+                                  "$imageUrl${data[index].posterPath}"
                               ),
+                            ),
 
-                              // CachedNetworkImage(
-                              //   errorWidget: (context, url, error) => const CircularProgressIndicator(),
-                              //   placeholder: (context, url) => const MyShimmer(
-                              //       color: Colors.white,
-                              //       width: 120,
-                              //       height: 200),
-                              //   fit: BoxFit.fill,
-                              //   width: 120,
-                              //   imageUrl: '$imageUrl${data[index].posterPath}',)
+                            // CachedNetworkImage(
+                            //   errorWidget: (context, url, error) => const CircularProgressIndicator(),
+                            //   placeholder: (context, url) => const MyShimmer(
+                            //       color: Colors.white,
+                            //       width: 120,
+                            //       height: 200),
+                            //   fit: BoxFit.fill,
+                            //   width: 120,
+                            //   imageUrl: '$imageUrl${data[index].posterPath}',)
                           );
                         },
                       ),

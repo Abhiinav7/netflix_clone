@@ -1,7 +1,9 @@
  import 'package:netflix/model/movie_detail_model.dart';
 import 'package:netflix/model/movie_recomendationModel.dart';
 import 'package:netflix/model/recpomended_movie_model.dart';
+import 'package:netflix/model/review_movie_model.dart';
 import 'package:netflix/model/searchMovieModel.dart';
+import 'package:netflix/model/trendingModel.dart';
 
 import '../common/utils.dart';
 import '../model/movie_model.dart';
@@ -33,6 +35,26 @@ class ApiServices {
       return movieModelFromJson(response.body);
     }
     throw Exception("failed to load now playing movies");
+  }
+  Future<TrendingModel> trendingIn()async {
+    endpoint="trending/all/day";
+    final url="$baseurl$endpoint$key";
+    final response=await http.get(Uri.parse(url));
+    if(response.statusCode==200){
+      print("trending works ");
+      return trendingModelFromJson(response.body);
+    }
+    throw Exception("failed to load trending");
+  }
+  Future<ReviewMovieModel> reviewMovies()async {
+    endpoint="trending/all/day";
+    final url="$baseurl$endpoint$key";
+    final response=await http.get(Uri.parse(url));
+    if(response.statusCode==200){
+      print("review of movie works ");
+      return reviewMovieModelFromJson(response.body);
+    }
+    throw Exception("failed to load review");
   }
   Future<TvSeriesModel> topRatedSeries()async {
     endpoint="tv/top_rated";

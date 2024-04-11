@@ -12,11 +12,11 @@ final TvSeriesModel seriesModel;
     Size size=MediaQuery.of(context).size;
     return SizedBox (
       width: size.width,
-      height:(size.height * 0.26) <200 ?220:(size.height * 0.26),
+      height:(size.height * 0.26) <200 ?260:(size.height * 0.26),
       child: CarouselSlider.builder(
 
         options: CarouselOptions(
-       height: (size.height * 0.33) <300 ?250:(size.height * 0.33),
+       height: (size.height * 0.33) <300 ?260:(size.height * 0.33),
           autoPlay: true,
           initialPage: 0,
           aspectRatio: 16/9,
@@ -32,11 +32,11 @@ final TvSeriesModel seriesModel;
             child: Column(
               children: [
                 CachedNetworkImage(
-                  // fit: BoxFit.fill,
+                  fit: BoxFit.fill,
                     imageUrl:"$imageUrl$url"
                 ),
-                SizedBox(height: 10,),
-                Text(seriesModel.results[index].name,style: TextStyle(fontSize: 14),)
+                SizedBox(height: 17,),
+                Text(seriesModel.results[index].name,style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
               ],
             ),
           );
