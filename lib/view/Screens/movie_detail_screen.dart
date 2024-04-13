@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:netflix/common/utils.dart';
 import 'package:netflix/model/movie_recomendationModel.dart';
+import 'package:netflix/model/review_movie_model.dart';
 import 'package:netflix/services/api_services.dart';
 
 import '../../model/movie_detail_model.dart';
@@ -26,12 +27,14 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   }
 
   late Future<MovieDetailModel> movieDetails;
+  late Future<ReviewMovieModel> reviews;
   late Future<MovieRecommendationModel> movieRecommendations;
   ApiServices apiServices = ApiServices();
 
   void fetchInitialData() {
     movieDetails = apiServices.getMovieDetails(widget.movieid);
     movieRecommendations = apiServices.getMovieRecommendations(widget.movieid);
+    reviews = apiServices.reviewMovies(widget.movieid);
     setState(() {});
   }
 
@@ -140,12 +143,24 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 5.0),
                                             child: InkWell(
-                                              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(movieid: moreLikeThis.results[index].id),));},
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            MovieDetailScreen(
+                                                                movieid:
+                                                                    moreLikeThis
+                                                                        .results[
+                                                                            index]
+                                                                        .id),
+                                                      ));
+                                                },
                                                 child: CachedNetworkImage(
-                                                  fit:BoxFit.fitWidth,
-                                              imageUrl:
-                                                  "$imageUrl${moreLikeThis.results[index].posterPath},",
-                                            )),
+                                                  fit: BoxFit.fitWidth,
+                                                  imageUrl:
+                                                      "$imageUrl${moreLikeThis.results[index].posterPath},",
+                                                )),
                                           );
                                         },
                                       ),
@@ -158,7 +173,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         }
                       },
                     ),
-                  )
+                  ),
+
                 ]);
           } else {
             return SizedBox();

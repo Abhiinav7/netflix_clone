@@ -46,8 +46,8 @@ class ApiServices {
     }
     throw Exception("failed to load trending");
   }
-  Future<ReviewMovieModel> reviewMovies()async {
-    endpoint="trending/all/day";
+  Future<ReviewMovieModel> reviewMovies(int id)async {
+    endpoint="movie/${id}/reviews";
     final url="$baseurl$endpoint$key";
     final response=await http.get(Uri.parse(url));
     if(response.statusCode==200){
